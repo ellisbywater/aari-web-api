@@ -1,0 +1,8 @@
+debug: true
+secret_key: 'JeFvgCrMuvkoAJjkHgyaMDxku'
+
+pgx:
+  maxOpenConns: 30
+  maxIdleConns: 30
+  maxIdleTime: "15m"
+  dsn: postgres://postgres:postgres@localhost:5432/aari_web_api_test?sslmode=disable
