@@ -1,4 +1,4 @@
-package webapp
+package api
 
 import (
 	"github.com/uptrace/bunrouter"
@@ -7,6 +7,7 @@ import (
 )
 
 func (app *App) InitRouter() {
+	api := NewAPI(app, "dev")
 	app.router = bunrouter.New(
 		bunrouter.WithMiddleware(reqlog.NewMiddleware(
 			reqlog.WithEnabled(app.IsDebug()),
@@ -15,8 +16,9 @@ func (app *App) InitRouter() {
 		bunrouter.WithMiddleware(bunrouterotel.NewMiddleware()),
 	)
 
-	app.apiRouter = app.router.NewGroup("/api",
+	app.apiRouter = app.router.NewGroup("/v1/api",
 		bunrouter.WithMiddleware(corsMiddleware),
 		bunrouter.WithMiddleware(errorHandler),
 	)
+	app.apiRouter.GET("/healthcheck", api.healthcheck)
 }

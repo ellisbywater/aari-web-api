@@ -1,4 +1,4 @@
-package webapp
+package api
 
 import (
 	"embed"
@@ -37,7 +37,7 @@ type Config struct {
 		maxIdleConns int    `yaml:"maxIdleConns"`
 		maxOpenConns int    `yaml:"maxOpenConns"`
 		maxIdleTime  string `yaml:"maxIdleTime"`
-	} `yaml:"dsn"`
+	} `yaml:"pgx"`
 }
 
 func ReadConfig(fsys fs.FS, service, env string) (*Config, error) {

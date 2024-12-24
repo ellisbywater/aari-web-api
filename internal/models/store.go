@@ -14,7 +14,8 @@ type Store struct {
 		Create(ctx context.Context, usercreate *UserCreate) error
 	}
 	Positions interface {
-		Create(context.Context, *Position) error
+		Create(context.Context, *PositionCreate) error
+		List(ctx context.Context, userID string) ([]*Position, error)
 	}
 }
 

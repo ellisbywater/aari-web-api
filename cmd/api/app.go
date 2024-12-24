@@ -1,4 +1,4 @@
-package webapp
+package api
 
 import (
 	"aari/web_api/internal/db"
@@ -39,11 +39,14 @@ type App struct {
 }
 
 func NewApp(ctx context.Context, cfg *Config) *App {
+
 	app := &App{
 		cfg: cfg,
 	}
+
 	app.ctx = ContextWithApp(ctx, app)
 	app.InitRouter()
+	app.store = models.InitStore(app.DB())
 	return app
 }
 func StartCLI(c *cli.Context) (context.Context, *App, error) {
@@ -64,6 +67,9 @@ func StartFromConfig(ctx context.Context, cfg *Config) (context.Context, *App, e
 		return nil, nil, err
 	}
 	return app.Context(), app, nil
+}
+func (app *App) Store() *models.Store {
+	return app.store
 }
 
 func (app *App) IsDebug() bool {

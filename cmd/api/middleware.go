@@ -1,4 +1,4 @@
-package webapp
+package api
 
 import (
 	"aari/web_api/httputil/httperror"

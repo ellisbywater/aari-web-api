@@ -5,4 +5,4 @@ pgx:
   maxOpenConns: 30
   maxIdleConns: 30
   maxIdleTime: "15m"
-  dsn: postgres://postgres:@localhost:5432/aari_web_api_dev?sslmode=disable
+  dsn: postgres://postgres:postgres@localhost:5432/aari_web_api_dev?sslmode=disable

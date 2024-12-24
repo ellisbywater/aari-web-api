@@ -16,13 +16,14 @@ type UserCreate struct {
 
 type User struct {
 	bun.BaseModel `bun:"table:users,alias:u"`
-	ID            string    `json:"-" bun:"type:uuid,pk,default:gen_random_uuid()"`
-	CreatedAt     time.Time `json:"created_at" bun:",nullzero,notnull,default:current_timestamp"`
-	UpdatedAt     time.Time `json:"updated_at" bun:",nullzero,notnull,default:current_timestamp"`
-	Email         string    `json:"email" bun:"email,notnull,unique"`
-	Username      string    `json:"username" bun:"username,notnull,unique"`
-	PasswordHash  string    `json:"password_hash" `
-	IsActive      bool      `json:"is_active" bun:"is_active,default:'true'"`
+	ID            string       `json:"id" bun:"type:uuid,pk,default:gen_random_uuid()"`
+	CreatedAt     time.Time    `json:"created_at" bun:",nullzero,notnull,default:current_timestamp"`
+	UpdatedAt     time.Time    `json:"updated_at" bun:",nullzero,notnull,default:current_timestamp"`
+	Email         string       `json:"email" bun:"email,notnull,unique"`
+	Username      string       `json:"username" bun:"username,notnull,unique"`
+	PasswordHash  string       `json:"password_hash" `
+	IsActive      bool         `json:"is_active" bun:"is_active,default:'true'"`
+	Portfolios    []*Portfolio `json:"portfolios" bun:"rel:has-many,join:id=user_id"`
 }
 
 var _ bun.BeforeAppendModelHook = (*User)(nil)

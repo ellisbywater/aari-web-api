@@ -1,8 +1,8 @@
 package main
 
 import (
+	"aari/web_api/cmd/api"
 	"aari/web_api/cmd/cli/migrate/migrations"
-	"aari/web_api/cmd/webapp"
 	"aari/web_api/httputil"
 	"fmt"
 	"log"
@@ -53,7 +53,7 @@ var apiCommand = &cli.Command{
 		},
 	},
 	Action: func(c *cli.Context) error {
-		ctx, app, err := webapp.StartCLI(c)
+		ctx, app, err := api.StartCLI(c)
 		if err != nil {
 			return err
 		}
@@ -77,7 +77,7 @@ var apiCommand = &cli.Command{
 		}()
 
 		fmt.Printf("listening on %s\n", srv.Addr)
-		fmt.Println(webapp.WaitExitSignal())
+		fmt.Println(api.WaitExitSignal())
 
 		return srv.Shutdown(ctx)
 	},
@@ -92,7 +92,7 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 				Name:  "init",
 				Usage: "create migration tables",
 				Action: func(c *cli.Context) error {
-					ctx, app, err := webapp.StartCLI(c)
+					ctx, app, err := api.StartCLI(c)
 					if err != nil {
 						return err
 					}
@@ -106,7 +106,7 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 				Name:  "migrate",
 				Usage: "migrate database",
 				Action: func(c *cli.Context) error {
-					ctx, app, err := webapp.StartCLI(c)
+					ctx, app, err := api.StartCLI(c)
 					if err != nil {
 						return err
 					}
@@ -132,7 +132,7 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 				Name:  "rollback",
 				Usage: "rollback the last migration group",
 				Action: func(c *cli.Context) error {
-					ctx, app, err := webapp.StartCLI(c)
+					ctx, app, err := api.StartCLI(c)
 					if err != nil {
 						return err
 					}
@@ -158,7 +158,7 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 				Name:  "lock",
 				Usage: "lock migrations",
 				Action: func(c *cli.Context) error {
-					ctx, app, err := webapp.StartCLI(c)
+					ctx, app, err := api.StartCLI(c)
 					if err != nil {
 						return err
 					}
@@ -172,7 +172,7 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 				Name:  "unlock",
 				Usage: "unlock migrations",
 				Action: func(c *cli.Context) error {
-					ctx, app, err := webapp.StartCLI(c)
+					ctx, app, err := api.StartCLI(c)
 					if err != nil {
 						return err
 					}
@@ -186,7 +186,7 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 				Name:  "create_go",
 				Usage: "create Go migration",
 				Action: func(c *cli.Context) error {
-					ctx, app, err := webapp.StartCLI(c)
+					ctx, app, err := api.StartCLI(c)
 					if err != nil {
 						return err
 					}
@@ -208,7 +208,7 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 				Name:  "create_sql",
 				Usage: "create up and down SQL migrations",
 				Action: func(c *cli.Context) error {
-					ctx, app, err := webapp.StartCLI(c)
+					ctx, app, err := api.StartCLI(c)
 					if err != nil {
 						return err
 					}
@@ -233,7 +233,7 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 				Name:  "status",
 				Usage: "print migrations status",
 				Action: func(c *cli.Context) error {
-					ctx, app, err := webapp.StartCLI(c)
+					ctx, app, err := api.StartCLI(c)
 					if err != nil {
 						return err
 					}
@@ -256,7 +256,7 @@ func newDBCommand(migrations *migrate.Migrations) *cli.Command {
 				Name:  "mark_applied",
 				Usage: "mark migrations as applied without actually running them",
 				Action: func(c *cli.Context) error {
-					ctx, app, err := webapp.StartCLI(c)
+					ctx, app, err := api.StartCLI(c)
 					if err != nil {
 						return err
 					}
